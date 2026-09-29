@@ -1,0 +1,7 @@
+---
+import Base from '../layouts/Base.astro';
+import PostList from '../components/PostList.astro';
+import {publishedPosts} from '../lib/posts';
+const posts=await publishedPosts();
+---
+<Base title="个人笔记"><main id="main"><section class="hero"><h1 class="eyebrow">H4J11N / 个人笔记</h1><div class="hero-bottom"><p>你好，我是 h4j11n。<br/>这里记录我的技术实践、比赛复盘，<br/>和那些还在寻找答案的问题。</p></div></section><section id="writing" class="writing"><div class="section-head"><h2>最近的记录</h2><a href="/archives/">{posts.length} 篇 / 全部文章 ↗</a></div><PostList posts={posts.slice(0,10)}/></section><section id="about" class="about"><span class="eyebrow">关于这里</span><div><p>把尝试过的东西写下来，把没想明白的问题留下来。<br/>这里是一份持续生长的学习记录。</p><a href="https://github.com/h4j11n" target="_blank" rel="noopener">在 GitHub 找到我 ↗</a></div></section></main></Base>

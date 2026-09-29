@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://h4j11n.github.io/sitemap-index.xml
