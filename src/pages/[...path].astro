@@ -1,0 +1,9 @@
+---
+import { render } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import {publishedPosts,postPath} from '../lib/posts';
+export async function getStaticPaths(){return (await publishedPosts()).map(post=>({params:{path:postPath(post)},props:{post}}));}
+const {post}=Astro.props;
+const {Content,headings}=await render(post);
+---
+<Base title={post.data.title} description={post.data.description} article date={post.data.date}><main id="main"><div class="back"><a href="/#writing">← 全部文章</a></div><header class="article-header"><div class="eyebrow">{post.data.tags[0] || '学习笔记'}</div><h1>{post.data.title}</h1><p class="deck">{post.data.description}</p><div class="article-meta"><span>h4j11n</span><time datetime={post.data.date.toISOString()}>{post.data.date.toISOString().slice(0,10)}</time>{post.data.tags.map(tag=><a href={'/tags/'+encodeURIComponent(tag)+'/'}>{tag}</a>)}</div></header><div class="article-grid"><article class="prose"><Content/><div class="end-note"><a href="/#writing">← 返回文章列表</a></div></article><aside class="toc" aria-label="文章目录"><span>本文目录</span><a href="#main">写在前面</a>{headings.filter(h=>h.depth===2).map(h=><a href={'#'+h.slug}>{h.text}</a>)}</aside></div></main></Base>

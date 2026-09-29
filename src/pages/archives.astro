@@ -1,0 +1,4 @@
+---
+import Base from '../layouts/Base.astro';import PostList from '../components/PostList.astro';import {publishedPosts} from '../lib/posts';const posts=await publishedPosts();
+---
+<Base title="文章归档"><main id="main" class="listing"><h1>文章归档</h1><PostList posts={posts}/></main></Base>
